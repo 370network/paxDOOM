@@ -1,4 +1,20 @@
 ================
+= paxDOOM =
+================
+
+Hackish modification of the fbDOOM port
+*Should* run on all ProlinOS based PAX terminals.
+
+To build (example):
+* cd fbdoom
+* make
+
+Usage:
+* copy built doom library
+* copy wads to /data/app/MAINAPP/ or /data/app/MAINAPP/lib
+* run and enjoy
+
+================
 = fbDOOM =
 ================
 
