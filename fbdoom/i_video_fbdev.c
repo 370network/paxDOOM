@@ -163,10 +163,10 @@ void I_InitGraphics (void)
     int i;
 
     /* Open fbdev file descriptor */
-    fd_fb = open("/dev/fb0", O_RDWR);
+    fd_fb = open("/dev/fb", O_RDWR);
     if (fd_fb < 0)
     {
-        printf("Could not open /dev/fb0");
+        perror("Could not open /dev/fb0");
         exit(-1);
     }
 
@@ -181,8 +181,7 @@ void I_InitGraphics (void)
             fb.red.length, fb.green.length, fb.blue.length, fb.transp.length, fb.red.offset, fb.green.offset, fb.blue.offset, fb.transp.offset);
 
     printf("I_InitGraphics: DOOM screen size: w x h: %d x %d\n", SCREENWIDTH, SCREENHEIGHT);
-
-
+	
     i = M_CheckParmWithArgs("-scaling", 1);
     if (i > 0) {
         i = atoi(myargv[i + 1]);
