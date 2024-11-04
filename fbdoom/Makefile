@@ -5,7 +5,7 @@
 # $Log:$
 #
 
-CROSS_COMPILE ?= #arm-linux-gnueabihf-
+CROSS_COMPILE ?= /Users/richardgracik/hax-pax/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-
 
 ifeq ($(V),1)
 	VB=''
@@ -22,12 +22,9 @@ OBJS+=$(OBJDIR)/i_input_tty.o
 CC=$(CROSS_COMPILE)gcc  # gcc or g++
 CFLAGS+=-ggdb3 -Os
 LDFLAGS+=-Wl,--gc-sections
-CFLAGS+=-ggdb3 -Wall -DNORMALUNIX -DLINUX -DSNDSERV # -DUSEASM
+CFLAGS+=-fPIC -shared -nostartfiles -Wall -DNORMALUNIX -DLINUX -DSNDSERV # -DUSEASM
 LIBS+=-lm -lc
 
-ifneq ($(NOSDL),1)
-	LIBS+= -lSDL
-endif
 
 # subdirectory for objects
 OBJDIR=build
@@ -58,7 +55,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o:	%.c
 	@echo [Compiling $<]
-	$(VB)$(CC) $(CFLAGS) -c $< -o $@
+	$(VB)$(CC) $(CFLAGS) -include pax_printf.h -static -c $< -o $@
 
 print:
 	@echo OBJS: $(OBJS)
